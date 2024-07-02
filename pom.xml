@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.1</version>
+    </parent>
+
+    <groupId>com.github.tomschi</groupId>
+    <artifactId>openapi-generator-issues</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+
+        <java.package.base>com.github.tomschi</java.package.base>
+
+        <openapi-generator-maven-plugin.version>7.6.0</openapi-generator-maven-plugin.version>
+        <springdoc.version>2.2.0</springdoc.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>Bar API</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/openapi/bar/api_bar.yaml</inputSpec>
+                            <output>${project.build.directory}/generated-sources/openapi-bar</output>
+                            <generatorName>spring</generatorName>
+                            <modelNameSuffix>RestDto</modelNameSuffix>
+                            <generateModelTests>false</generateModelTests>
+                            <generateApiTests>false</generateApiTests>
+                            <ignoreFileOverride>${project.basedir}/src/main/openapi/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <configOptions>
+                                <sourceFolder>/</sourceFolder>
+                                <basePackage>${java.package.base}</basePackage>
+                                <apiPackage>${java.package.base}.api.bar</apiPackage>
+                                <configPackage>${java.package.base}.configuration.bar</configPackage>
+                                <modelPackage>${java.package.base}.dto.bar</modelPackage>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <delegatePattern>true</delegatePattern>
+                                <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
+                                <performBeanValidation>true</performBeanValidation>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Foo API</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/openapi/foo/api_foo.yaml</inputSpec>
+                            <output>${project.build.directory}/generated-sources/openapi-foo</output>
+                            <generatorName>spring</generatorName>
+                            <modelNameSuffix>RestDto</modelNameSuffix>
+                            <generateModelTests>false</generateModelTests>
+                            <generateApiTests>false</generateApiTests>
+                            <ignoreFileOverride>${project.basedir}/src/main/openapi/.openapi-generator-ignore
+                            </ignoreFileOverride>
+                            <configOptions>
+                                <sourceFolder>/</sourceFolder>
+                                <basePackage>${java.package.base}</basePackage>
+                                <apiPackage>${java.package.base}.api.foo</apiPackage>
+                                <configPackage>${java.package.base}.configuration.foo</configPackage>
+                                <modelPackage>${java.package.base}.dto.foo</modelPackage>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <delegatePattern>true</delegatePattern>
+                                <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
+                                <performBeanValidation>true</performBeanValidation>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+    </dependencies>
+</project>

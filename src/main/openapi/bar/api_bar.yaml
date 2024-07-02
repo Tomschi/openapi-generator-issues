@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: Bar API
+  description: Bar API
+  version: 1.0.0
+
+paths:
+  /bar:
+    get:
+      tags:
+        - Bar
+      operationId: getBar
+      responses:
+        200:
+          description: Returns bar
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bar"
+
+components:
+  schemas:
+    Bar:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: "#/components/schemas/BarType"
+    BarType:
+      type: string
+      enum:
+        - 3
+        - 4
